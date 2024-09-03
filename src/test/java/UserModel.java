@@ -5,6 +5,33 @@ public class UserModel {
     private String phone_number;
     private String nid;
     private String role;
+    private String customer1;
+    private String customer2;
+    private String agent;
+
+    public String getCustomer1() {
+        return customer1;
+    }
+
+    public void setCustomer1(String customer1) {
+        this.customer1 = customer1;
+    }
+
+    public String getCustomer2() {
+        return customer2;
+    }
+
+    public void setCustomer2(String customer2) {
+        this.customer2 = customer2;
+    }
+
+    public String getAgent() {
+        return agent;
+    }
+
+    public void setAgent(String agent) {
+        this.agent = agent;
+    }
 
     public String getEmail() {
         return email;

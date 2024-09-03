@@ -3,6 +3,7 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.FileInputStream;
@@ -30,21 +31,33 @@ public class UserController extends Setup {
     }
     public JsonPath searchUser(String userId) throws IOException {
         RestAssured.baseURI=prop.getProperty("baseUrl");
-        Response res=given().contentType("application/json").header("Authorization",prop.get("token"))
+        Response res=given().contentType("application/json").header("Authorization","Bearer " + prop.get("token"))
                 .when().get("/user/search/id/"+userId);
         return res.jsonPath();
     }
     public JsonPath createUser(UserModel model) throws ConfigurationException {
         RestAssured.baseURI= prop.getProperty("baseUrl");
         Response res=given().contentType("application/json")
-                .header("Authorization",prop.getProperty("token"))
+                .header("Authorization","Bearer " + prop.getProperty("token"))
                 .header("X-AUTH-SECRET-KEY",prop.getProperty("partnerKey"))
                 .body(model)
                 .when().post("/user/create");
         System.out.println(res.asString());
         return res.jsonPath();
+    }
 
-
+    public void agentLogin(String email, String password) throws ConfigurationException {
+        RestAssured.baseURI= prop.getProperty("baseUrl");
+        UserModel model=new UserModel();
+        model.setEmail(email);
+        model.setPassword(password);
+        Response res=given().contentType("application/json").body(model).post("/user/login");
+        System.out.println(res.asString());
+        JsonPath jsonPath=res.jsonPath();
+        String token= jsonPath.get("token");
+        if(token!=null) System.out.println("Agent login");
+        System.out.println(token);
+        Utils.setEvnVar("agent_token",token);
     }
 
 

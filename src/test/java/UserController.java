@@ -59,7 +59,4 @@ public class UserController extends Setup {
         System.out.println(token);
         Utils.setEvnVar("agent_token",token);
     }
-
-
-
 }

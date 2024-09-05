@@ -12,6 +12,5 @@ public class Setup {
         prop=new Properties();
         fs=new FileInputStream("./src/test/resources/config.properties");
         prop.load(fs);
-
     }
 }

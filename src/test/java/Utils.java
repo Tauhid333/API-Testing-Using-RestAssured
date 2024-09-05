@@ -1,6 +1,13 @@
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 
 public class Utils {
@@ -15,5 +22,24 @@ public class Utils {
         return randId;
 
     }
+    public static void saveUsers(UserModel model) throws IOException, ParseException {
+        String filelocation = "./src/test/resources/users.json";
+        JSONParser parser = new JSONParser();
+        JSONArray users = (JSONArray) parser.parse(new FileReader(filelocation));
+        JSONObject userObj = new JSONObject();
+        userObj.put("name",model.getName());
+        userObj.put("email",model.getEmail());
+        userObj.put("password",model.getPassword());
+        userObj.put("phone_number",model.getPhone_number());
+        userObj.put("NID",model.getNid());
+        userObj.put("role",model.getRole());
+        users.add(userObj);
+        FileWriter writer = new FileWriter(filelocation);
+        writer.write(users.toJSONString());
+        writer.flush();
+        writer.close();
+
+    }
+
 
 }

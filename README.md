@@ -1,9 +1,11 @@
-# OrangeHRM Automation test
+# Dmoney API Rest Assured Automation
 
 ## Short summary:
-Automated the HRM modules of [https://opensource-demo.orangehrmlive.com/](https://opensource-demo.orangehrmlive.com/)
+Automated the Dmoney API [https://dmoney.roadtocareer.net/api-docs/transaction/](https://dmoney.roadtocareer.net/api-docs/transaction/)
 
 ## Technology used:
 Selenium
+
+Rest Assured
 
 TestNG
